@@ -95,6 +95,9 @@ const closeModalButton = document.querySelector('.close-modal');
 const noteForm = document.querySelector('#noteForm');
 const notesContainer = document.querySelector('.notes-container');
 const noNotesText = document.querySelector('.no-notes');
+const viewNote = document.querySelector('#view-note');
+const editForm = document.getElementById('editNoteForm')
+const closeNote = document.querySelector('#close-note');
 
 const date = new Date().toLocaleString()
 
@@ -136,17 +139,38 @@ function renderNotes(notes) {
     notes.forEach((note) => {
       const noteCard = document.createElement('div');
       noteCard.classList.add('note-card');
+      noteCard.dataset.title = note.title;  
+      noteCard.dataset.content = note.content;
+      noteCard.dataset.id = note._id;  
+      console.log(note._id + 'wfwfew');
+      
       noteCard.innerHTML = `
         <h3>${note.title}</h3>
         <p>${truncateText(note.content, 100)}</p>
-        <div class="note-actions">
-          <button><i class="edit-icon">✏️</i></button>
-          <button><i class="delete-icon">🗑️</i></button>
+        
+         <footer>
+         <div class="note-actions">
+          <button id='delete-icon'>
+          <i class="delete-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+          </i></button>
         </div>
-         <footer>${note.date.toLocaleString()}</footer>
+         
+         ${new Date(note.date).toLocaleDateString()}
+         </footer>
       `;
-      noteCard.querySelector('.edit-icon').addEventListener('click', () => editNoteHandler(note));
-      noteCard.querySelector('.delete-icon').addEventListener('click', () => deleteNoteHandler(note._id));
+      noteCard.addEventListener('click', (event) => {
+        if (event.target.closest('#delete-icon')) {
+          deleteNoteHandler(note._id);
+          console.log('sggds'+note._id);
+          
+        } else {
+          editNoteHandler(note);
+         
+          
+        }
+      });
+      noteCard.querySelector('#delete-icon').addEventListener('click', () => deleteNoteHandler(note._id));
       notesContainer.appendChild(noteCard);
     });
   }
@@ -165,11 +189,16 @@ closeModalButton?.addEventListener('click', () => {
   noteForm.reset();
   isEditing = false;
 });
+closeNote?.addEventListener('click', () => {
+  viewNote.classList.add('hidden');
+  editForm.reset();
+  isEditing = false;
+});
 
 // Handle Add or Edit Note
 noteForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const title = document.querySelector('#title').value.trim();
+  const title = document.querySelector('#title').value.trim().toUpperCase();
   const content = document.querySelector('#content').value.trim();
 
   if (!title || !content) {
@@ -179,22 +208,7 @@ noteForm.addEventListener('submit', async (e) => {
 
 
   try {
-    if (isEditing) {
-      const response = await fetch(`http://localhost:5000/api/notes/${editingNote._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ title, content, date }),
-      });
-
-      if (response.ok) {
-        alert('Note updated successfully!');
-      } else {
-        alert('Failed to update note.');
-      }
-    } else {
+  
       const response = await fetch('http://localhost:5000/api/notes', {
         method: 'POST',
         headers: {
@@ -209,7 +223,7 @@ noteForm.addEventListener('submit', async (e) => {
       } else {
         alert('Failed to add note.');
       }
-    }
+    
     fetchNotes();
   } catch (error) {
     console.error('Error saving note:', error);
@@ -219,13 +233,57 @@ noteForm.addEventListener('submit', async (e) => {
   noteForm.reset();
 });
 
+editForm.addEventListener('submit',async (e) => {
+  e.preventDefault();
+  let title = document.querySelector('#noteTitle').value.trim().toUpperCase();
+  let content = document.querySelector('#noteContent').value.trim();
+  if (!title || !content) {
+    alert('Both title and content are required!');
+    return;
+  }
+  if (title === editingNote.title && content === editingNote.content) {
+    viewNote.classList.add('hidden'); 
+    editForm.reset(); 
+    isEditing = false;
+    return;  
+  }
+ 
+  try{
+   
+      const response = await fetch(`http://localhost:5000/api/notes/${editingNote._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ title, content, date }),
+      });
+
+      if (response.ok) {
+        alert('Note updated successfully!');
+      } else {
+        alert('Failed to update note.');
+      }
+    fetchNotes();
+  }
+  catch (error) {
+    console.error('Error saving note:', error);
+  }
+  viewNote.classList.add('hidden');
+  editForm.reset();
+}
+)
+
 // Edit Note Handler
 function editNoteHandler(note) {
   isEditing = true;
   editingNote = note;
-  document.querySelector('#title').value = note.title;
-  document.querySelector('#content').value = note.content;
-  modal.classList.remove('hidden');
+  console.log("anoo "+ JSON.stringify(note));
+  document.querySelector('#noteTitle').value = note.title;
+  document.querySelector('#noteContent').value = note.content;
+  viewNote.classList.remove('hidden');
+
+  
 }
 
 // Delete Note Handler

@@ -1,0 +1,265 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: ;
+    color: ;
+    transition: all 0.5s ease;
+    padding: 1rem;
+}
+.login-container, .signup-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-top: 18rem;
+}
+.signup-container{
+    padding-top: 16rem;
+}
+#loginForm, #signupForm{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 25rem;
+}
+#loginForm label, #loginForm p , #signupForm label, #signupForm p{
+    font-size: 13px;
+}
+#loginForm input, #signupForm input{
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid ;
+}
+#loginForm button , #signupForm button{
+    padding: 9px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    margin: 4% 1%;
+    background-color: ;
+    color: ;
+    cursor: pointer;
+}
+#loginForm button:hover, #signupForm button:hover{
+    background-color: ;
+}
+#loginForm button:active, #signupForm button:active{
+    background-color: ;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 1% 2%;
+}
+.nav-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.logout-btn{
+    padding: 7px 1.5rem;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: ;
+    color: ;
+    cursor: pointer;
+}
+.logout-btn:hover{
+    background-color: ;
+}
+.logout-btn:active{
+    background-color: ;
+}
+
+.app{
+    text-align: center;
+    margin-top: 2rem;
+}
+.header{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5rem;
+}
+.header button{
+    padding: 7px 1.5rem;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: ;
+    color: ;
+    cursor: pointer;
+}
+.header button:hover{
+    background-color: ;
+}
+.header button:active{
+    background-color: ;
+}
+
+.modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: ;
+    top: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-content{
+    margin: 10rem;
+    background-color: ;
+    width: 70%;
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    border: 0.2px solid ;
+    text-align: left;
+    height: fit-content;
+}
+#noteForm, #editNoteForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 1rem;
+}
+#noteForm input, #noteForm textarea, #editNoteForm input, #editNoteForm textarea{
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    background-color: ;
+}
+#noteForm textarea, #editNoteForm textarea{
+    height:20rem;
+}
+#noteForm input:focus , #noteForm textarea:focus, #editNoteForm input:focus, #editNoteForm textarea:focus{
+    outline: none;
+}
+
+.modal-actions{
+    display: flex;
+    justify-content: space-between;
+}
+.save-note{
+    padding: 7px 1.5rem;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: ;
+    color: ;
+    cursor: pointer;
+}
+.save-note:hover{
+    background-color: ;
+}
+.save-note:active{
+    background-color: ;
+}
+.close-modal{
+    padding: 7px 1.5rem;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: ;
+    color: ;
+    cursor: pointer;
+}
+
+.close-modal:hover{
+    background-color: ;
+}
+.close-modal:active{
+    background-color: ;
+}
+
+.notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 3px 15%;
+  }
+  
+  .no-notes {
+    text-align: center;
+    color: ;
+  }
+  
+  .note-card {
+    background-color: ;
+    padding: 20px;
+    color: ;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+    height:fit-content;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+}
+.note-card:hover{
+    background-color: ;
+}
+.note-card:active{
+    background-color: ;
+}
+  
+  .note-card h3 {
+    margin-bottom: 10px;
+  }
+  
+  .note-card p {
+    font-size: 0.9em;
+    color: ;
+    line-height: 1.4;
+    max-height: 3.6em;
+    text-overflow: ellipsis;
+    margin: 8px 0px;
+    overflow: hidden;   
+    font-weight:400 ;
+  }
+  
+  .note-card footer {
+    margin-top: 35%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: ;
+    text-align: right;
+    align-items: center;
+  }
+#delete-icon{
+    background-color:;
+    cursor: pointer;
+    border: none;
+    padding:11px 1rem;
+    border-radius: 50%;
+    color: ;
+}
+.hidden{
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .notes-container{
+        grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+        padding: 10px;
+    }
+    .note-card{
+        overflow: hidden;
+        padding: 15px;
+    }
+    .modal-content{
+        
+        margin-left: 0rem;
+        margin-right: 1.5rem;
+    }
+}

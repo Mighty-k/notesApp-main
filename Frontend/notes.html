@@ -33,15 +33,28 @@
           <div class="modal-content">
             <h2>Add New Note</h2>
             <form id="noteForm">
-              <label for="title">Title:</label>
-              <input type="text" id="title" name="title" required>
-              
-              <label for="content">Content:</label>
-              <textarea id="content" name="content" rows="5" required></textarea>
+              <input type="text" id="title" name="title" placeholder="TITLE" >
+              <hr>
+              <textarea id="content" name="content" rows="5" placeholder="Content..." ></textarea>
               
               <div class="modal-actions">
                 <button type="submit" class="save-note">Save Note</button>
                 <button type="button" class="close-modal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- view notes modal  -->
+        <div id="view-note" class="modal hidden">
+          <div class="modal-content">
+            <form id="editNoteForm">
+              <input type="text" id="noteTitle" name="title" placeholder="TITLE" required>
+              <hr>
+              <textarea id="noteContent" name="content" rows="5" placeholder="Content..." required></textarea>
+              
+              <div class="modal-actions">
+                <button type="submit" class="save-note">Save Note</button>
+                <button type="button" id="close-note" class="close-modal">Close</button>
               </div>
             </form>
           </div>

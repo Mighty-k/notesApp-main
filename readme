@@ -1,6 +1,12 @@
+Instructions!!
+
+make sure you have mongo db server and mongodb compass installed 
+make sure you have node js installed
+extract the zip file 
 open this folder in vs code
-run:
-cd backend
-in the terminal
+in the terminal:
+run:cd backend
 run: npm install 
 then run: nodemon server.js
+you are to add the styles to this project which we did in class
+there is a 'style file in the front-end folder' make it a css file and add your styles to it
